@@ -36,8 +36,8 @@ class TensorflowNetwork(d5.Network):
         tf_args = {}
         if verbose:
             tf_args['log_device_placement'] = True
-        self.session_config = tf.ConfigProto(**tf_args) if self.device_option.is_gpu() \
-            else tf.ConfigProto(device_count={'GPU': 0}, **tf_args)
+        self.session_config = tf.compat.v1.ConfigProto(**tf_args) if self.device_option.is_gpu() \
+            else tf.compat.v1.ConfigProto(device_count={'GPU': 0}, **tf_args)
         if self.device_option.is_gpu():
             self.session_config.gpu_options.visible_device_list = str(self.device_option.num)
 
