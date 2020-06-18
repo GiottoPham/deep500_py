@@ -3,7 +3,8 @@ from typing import List
 import deep500 as d5
 
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.compat.v1.disable_v2_behavior()
 
 
 class TensorflowNetwork(d5.Network):
@@ -36,8 +37,8 @@ class TensorflowNetwork(d5.Network):
         tf_args = {}
         if verbose:
             tf_args['log_device_placement'] = True
-        self.session_config = tf.compat.v1.ConfigProto(**tf_args) if self.device_option.is_gpu() \
-            else tf.compat.v1.ConfigProto(device_count={'GPU': 0}, **tf_args)
+        self.session_config = tf.ConfigProto(**tf_args) if self.device_option.is_gpu() \
+            else tf.ConfigProto(device_count={'GPU': 0}, **tf_args)
         if self.device_option.is_gpu():
             self.session_config.gpu_options.visible_device_list = str(self.device_option.num)
 
