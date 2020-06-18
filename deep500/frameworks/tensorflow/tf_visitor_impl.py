@@ -7,8 +7,6 @@ tf.compat.v1.disable_v2_behavior()
 
 import deep500 as d5
 
-from .tf_network import TensorflowNetwork
-
 
 class TensorflowVisitor(d5.OnnxBaseVisitor):
 
